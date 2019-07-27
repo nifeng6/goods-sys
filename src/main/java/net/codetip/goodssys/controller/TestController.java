@@ -1,6 +1,7 @@
 package net.codetip.goodssys.controller;
 
 import net.codetip.goodssys.domain.User;
+import net.codetip.goodssys.mapper.BlogMapper;
 import net.codetip.goodssys.mapper.GoodsMapper;
 import net.codetip.goodssys.mapper.UserMapper;
 import net.codetip.goodssys.service.UserService;
@@ -67,12 +68,15 @@ public class TestController {
     @Autowired
     private GoodsMapper goodsMapper;
 
+    @Autowired
+    private BlogMapper blogMapper;
+
 
         @RequestMapping("test")
         @ResponseBody
-        public String test(){
-            goodsMapper.reduce(1);
-            return "success";
+        public Object test(){
+
+            return blogMapper.findAll();
         }
 
 

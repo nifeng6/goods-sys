@@ -29,12 +29,21 @@ public class MainController {
 
     @RequestMapping("/login")
     public String login(){
-        return "login";
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User)subject.getPrincipal();
+        if(user==null){
+            return "login";
+        }else {
+            return "redirect:/";
+        }
+
     }
 
     @RequestMapping("/")
     public String index(){
-        return "index";
+
+
+            return "index";
     }
 
     @RequestMapping("/memberList")

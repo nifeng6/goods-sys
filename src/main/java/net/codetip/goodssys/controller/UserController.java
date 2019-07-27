@@ -78,7 +78,4 @@ public class UserController {
         redel.put("success",true);
         return redel;
     }
-
-
-
 }
