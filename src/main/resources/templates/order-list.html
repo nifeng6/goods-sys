@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html class="x-admin-sm">
+<html class="x-admin-sm"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
     
     <head>
         <meta charset="UTF-8">
@@ -35,16 +37,6 @@
                 <div class="layui-col-md12">
 
                     <div class="layui-card">
-                        <div class="layui-card-body ">
-                            <div class="layui-collapse" lay-filter="test">
-                                <div class="layui-colla-item">
-                                <h2 class="layui-colla-title">条件筛选<i class="layui-icon layui-colla-icon"></i></h2>
-                                <div class="layui-colla-content">
-
-                                </div>
-                              </div>
-                            </div>
-                        </div>
 
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
@@ -60,16 +52,16 @@
                                         <th>操作</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2017009171822298053</td>
-                                        <td>老王:18925139194</td>
-                                        <td>北京</td>
-                                        <td>7829.10</td>
+                                    <tr th:each="ugoods : ${ugoodses}">
+                                        <td th:text="${ugoods.id}">2017009171822298053</td>
+                                        <td th:text="${ugoods.user}">老王:18925139194</td>
+                                        <td th:text="${ugoods.address}">北京</td>
+                                        <td th:text="${ugoods.price}">7829.10</td>
                                         <td>未发货</td>
                                         <td>申通物流</td>
-                                        <td>2017-08-17 18:22</td>
+                                        <td th:text="${ugoods.dateTime}">2017-08-17 18:22</td>
                                         <td class="td-manage">
-                                            <button class="layui-btn" onclick="member_del(this,'要删除的id')">
+                                                <button class="layui-btn" th:onclick="|member_del(this,${ugoods.id})|">
                                                 <i class="layui-icon">&#x1006;</i>取消订单</button>
                                         </td>
                                     </tr>
@@ -139,18 +131,22 @@
             });
         }
 
-        /*用户-删除*/
-        function member_del(obj, id) {
-            layer.confirm('确认要删除吗？',
-            function(index) {
+
+
+    function member_del(obj, id) {
+        layer.confirm('确认要删除吗？',
+            function (index) {
                 //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!', {
-                    icon: 1,
-                    time: 1000
-                });
+                $.post('/ugoods/ugdel',{
+                    "id":id},function (result) {
+                    if (result.success){
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!', {
+                            icon: 1,
+                            time: 1000});}});
+                // layer.alert(obj);
             });
-        }
+    }
 
         function delAll(argument) {
 

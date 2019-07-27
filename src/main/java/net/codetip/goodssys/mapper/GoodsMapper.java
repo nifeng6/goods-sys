@@ -3,6 +3,7 @@ package net.codetip.goodssys.mapper;
 
 import net.codetip.goodssys.domain.Goods;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -14,4 +15,8 @@ public interface GoodsMapper {
 
     @Delete("delete from goods where id=#{id}")
     void deleteById(int id);
+
+    @Insert("insert into goods(name,price,number,miaoshu) values(#{name},#{price},#{number},#{miaoshu})")
+    void insert(Goods goods);
+
 }

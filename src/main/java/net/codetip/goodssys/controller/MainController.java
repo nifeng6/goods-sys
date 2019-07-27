@@ -1,8 +1,10 @@
 package net.codetip.goodssys.controller;
 
 import net.codetip.goodssys.domain.Goods;
+import net.codetip.goodssys.domain.Ugoods;
 import net.codetip.goodssys.domain.User;
 import net.codetip.goodssys.mapper.GoodsMapper;
+import net.codetip.goodssys.mapper.UGoodsMapper;
 import net.codetip.goodssys.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class MainController {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private UGoodsMapper uGoodsMapper;
 
     @RequestMapping("/login")
     public String login(){
@@ -38,7 +43,9 @@ public class MainController {
     }
 
     @RequestMapping("/orderList")
-    public String orderList(){
+    public String orderList(Model model){
+        List<Ugoods> ugoodses = uGoodsMapper.findAll();
+        model.addAttribute("ugoodses",ugoodses);
         return "order-list";
     }
 
