@@ -5,6 +5,7 @@ import net.codetip.goodssys.domain.Goods;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -19,4 +20,9 @@ public interface GoodsMapper {
     @Insert("insert into goods(name,price,number,miaoshu) values(#{name},#{price},#{number},#{miaoshu})")
     void insert(Goods goods);
 
+    @Select("select * from goods where id=#{id}")
+    Goods findById(int id);
+
+    @Update("update goods set number=number-1 where id=#{id}")
+    void reduce(int id);
 }

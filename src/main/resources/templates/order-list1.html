@@ -64,8 +64,12 @@
                   <td th:text="${goods.number}">数量.10</td>
                   <td th:text="${goods.createTime}">2017-08-17 18:22</td>
                   <td class="td-manage">
-                    <button class="layui-btn" onclick="xadmin.open('购买','goods/orderAdd',500,400)">
-                      <i class="layui-icon"></i>购买</button>
+<!--                    <button class="layui-btn" onclick="xadmin.open('购买','goods/orderAdd',500,400)">-->
+<!--                      <i class="layui-icon"></i>购买</button>-->
+
+                    <button class="layui-btn" th:onclick="|mai(this,${goods.id})|">
+                      <i class="layui-icon">&#x1006;</i>购买</button>
+
                     <button class="layui-btn" th:onclick="|member_del(this,${goods.id})|">
                       <i class="layui-icon">&#x1006;</i>删除</button>
                   </td>
@@ -103,6 +107,12 @@
         elem: '#end' //指定元素
       });
     });
+
+  function huoqu() {
+      var username = $("[id='username']").val();
+      alert(username);
+  }
+
 
   /*用户-停用*/
   function member_stop(obj, id) {
@@ -151,6 +161,24 @@
         // layer.alert(obj);
       });
   }
+
+  function mai(obj,id) {
+    layer.confirm('确认要购买吗？',
+            function (index) {
+                $.post('/ugoods/mai',{
+                  "id":id
+                },function (result) {
+                    if (result.success){
+                      layer.msg("购买成功");
+                    } else{
+                      layer.msg("购买失败");
+                    }
+                        }
+                );
+
+            });
+  }
+
 
   /*点击购买*/
   function goodsb(id) {

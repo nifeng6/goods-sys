@@ -39,6 +39,7 @@
                                     <th>性别</th>
                                     <th>手机</th>
                                     <th>余额</th>
+                                    <th>收获地址</th>
                                     <th>操作</th></tr>
                                 </thead>
                                 <tbody>
@@ -48,6 +49,7 @@
                                     <td th:text="${user.sex}">男</td>
                                     <td th:text="${user.phone}">13000000000</td>
                                     <td th:text="${user.money}">余额</td>
+                                    <td th:text="${user.address}">地址</td>
                                     <td class="td-manage">
                                       <a title="删除" th:onclick="|member_del(this,'${user.id}')|" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>

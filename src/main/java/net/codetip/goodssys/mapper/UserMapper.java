@@ -5,8 +5,9 @@ import net.codetip.goodssys.domain.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Service;
+import org.apache.ibatis.annotations.Update;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface UserMapper {
@@ -17,10 +18,13 @@ public interface UserMapper {
     @Select("select *from user where username=#{username}")
     User findByName(String username);
 
-    @Select("select id,username,sex,money,phone from user")
+    @Select("select id,username,sex,money,phone,address from user")
     List<User> findAll();
 
     @Delete("delete from user where id=#{id}")
     void delete(int id);
+
+    @Update("update user set money=money-#{price} where id=#{id}")
+    void reduce(int id, BigDecimal price);
 
 }

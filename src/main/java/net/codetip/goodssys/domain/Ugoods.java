@@ -3,6 +3,7 @@ package net.codetip.goodssys.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Ugoods {
@@ -12,7 +13,7 @@ public class Ugoods {
   private String goods;
   private String address;
   private String phone;
-  private String price;
+  private BigDecimal price;
   @DateTimeFormat(pattern = "yyyy-MM-dd")//通过valid注解获取当前时间，我真是个小天才
   private Date dateTime;
   private Integer uid;
@@ -63,14 +64,13 @@ public class Ugoods {
   }
 
 
-  public String getPrice() {
+  public BigDecimal getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(BigDecimal price) {
     this.price = price;
   }
-
 
   public Date getDateTime() {
     return dateTime;

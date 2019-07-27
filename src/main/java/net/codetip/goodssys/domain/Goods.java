@@ -3,13 +3,14 @@ package net.codetip.goodssys.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Goods {
 
   private Integer id;
   private String name;
-  private String price;
+  private BigDecimal price;
   private Integer number;
   private String miaoshu;
   @DateTimeFormat(pattern = "yyyy-MM-dd")//通过valid注解获取当前时间，我真是个小天才
@@ -31,15 +32,13 @@ public class Goods {
     this.id = id;
   }
 
-
-  public String getPrice() {
+  public BigDecimal getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(BigDecimal price) {
     this.price = price;
   }
-
 
   public Integer getNumber() {
     return number;
