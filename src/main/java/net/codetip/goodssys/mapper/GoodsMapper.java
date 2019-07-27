@@ -17,7 +17,7 @@ public interface GoodsMapper {
     @Delete("delete from goods where id=#{id}")
     void deleteById(int id);
 
-    @Insert("insert into goods(name,price,number,miaoshu) values(#{name},#{price},#{number},#{miaoshu})")
+    @Insert("insert into goods(name,price,number,miaoshu,create_time) values(#{name},#{price},#{number},#{miaoshu},#{createTime})")
     void insert(Goods goods);
 
     @Select("select * from goods where id=#{id}")
