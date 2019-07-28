@@ -66,7 +66,7 @@
                 <div class="layui-card-body">
                     <span class="layui-badge layui-bg-blue" th:text="${blog.label}">标签分类</span>
                     <span style="color: #009688"><small>文章更新时间：<p th:text="${blog.createTime}">1970-10-10</p>></small>&nbsp;&nbsp;<small th:text="${blog.author}">作者：曾某某</small></span>
-                    <a href=""><div class="layui-badge layui-bg-green" style="bottom: 10px;right: 10px;bottom: 10px;right: 10px;position: absolute;font-size: 20px;padding: 9px;border-radius: 10px;">阅读全文</div></a>
+                    <a th:href="|@{/blog/blogArticle}?id=${blog.id}|"><div class="layui-badge layui-bg-green" style="bottom: 10px;right: 10px;bottom: 10px;right: 10px;position: absolute;font-size: 20px;padding: 9px;border-radius: 10px;">阅读全文</div></a>
                 </div>
             </div>
 
@@ -103,30 +103,16 @@
             <!-- 用于存放标签，在这里可以循环出来 -->
             <div class="layui-card">
                 <div class="layui-card-header">热门标签</div>
-                <div class="layui-card-body">
-                    <a href=""><div class="layui-badge layui-bg-blue">标签</div></a>
-                    <a href=""><div class="layui-badge layui-bg-blue">标签</div></a>
-                    <a href=""><div class="layui-badge layui-bg-blue">标签</div></a>
-                    <a href=""><div class="layui-badge layui-bg-blue">标签</div></a>
-                    <a href=""><div class="layui-badge layui-bg-blue">标签</div></a>
+                <div class="layui-card-body" th:each="blog : ${blogs}">
+                    <a href=""><div class="layui-badge layui-bg-blue" th:text="${blog.label}">标签</div></a>
                 </div>
             </div>
 
             <!-- 文章置顶内容，个人指定的值 -->
-            <div class="layui-card" style="padding: 5px">
+            <div class="layui-card" style="padding: 5px" th:each="blog : ${blogs}">
                 <div style="margin-top: 3px">
                     <div class="layui-badge">置顶</div>
-                    <a href="" style="color:#19e1bc;"><span>文章标题内容，可凭自己数据库设置的指定</span></a>
-                </div>
-                    
-                <div style="margin-top: 3px">
-                    <div class="layui-badge">置顶</div>
-                    <a href="" style="color:#19e1bc;"><span>文章标题内容，可凭自己数据库设置的指定</span></a>
-                </div>
-                
-                <div style="margin-top: 3px">
-                    <div class="layui-badge">置顶</div>
-                    <a href="" style="color:#19e1bc;"><span>文章标题内容，可凭自己数据库设置的指定</span></a>
+                    <a href="" style="color:#19e1bc;"><span th:text="${blog.title}">文章标题内容，可凭自己数据库设置的指定</span></a>
                 </div>
             </div>
 

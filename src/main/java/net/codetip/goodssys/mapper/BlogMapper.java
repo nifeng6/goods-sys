@@ -15,4 +15,7 @@ public interface BlogMapper {
 
     @Insert("insert into blog(title,content,uid,create_time,label,author) values(#{title},#{content},#{uid},#{createTime},#{label},#{author})")
     void insert(Blog blog);
+
+    @Select("select * from blog where id=#{id}")
+    Blog findById(int id);
 }

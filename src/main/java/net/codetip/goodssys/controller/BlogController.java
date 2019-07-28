@@ -57,4 +57,13 @@ public class BlogController {
         return result;
     }
 
+
+
+    @RequestMapping("blogArticle")
+    public String blogArticle(Model model,int id){
+        Blog blog = blogMapper.findById(id);
+        model.addAttribute("blog",blog);
+        return "blog_article";
+    }
+
 }

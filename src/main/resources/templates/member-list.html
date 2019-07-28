@@ -61,28 +61,43 @@
                                 </tbody>
                             </table>
                         </div>
+
+<!--                            分页部分-->
                         <div class="layui-card-body ">
                             <div class="page">
-                                <div>
-                                  <a class="prev" href="">&lt;&lt;</a>
-                                  <a class="num" href="">1</a>
-                                  <span class="current">2</span>
-                                  <a class="num" href="">3</a>
-                                  <a class="num" href="">489</a>
-                                  <a class="next" href="">&gt;&gt;</a>
-                                </div>
+                                <div id="test1"></div>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
         </div> 
     </body>
     <script>
-      layui.use(['laydate','form'], function(){
+      layui.use(['laydate','form','laypage'], function(){
         var laydate = layui.laydate;
         var  form = layui.form;
+        var laypage = layui.laypage;
+        var pages = [[${page.getPages()}]];
+          //  分页部分
+          laypage.render({
+              elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+              ,count: pages*10 //数据总数，从服务端得到
+              ,jump: function(obj, first){
+                  var curr = obj.curr;
+                  // alert(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                  $.post('memberList',{
+                      "p":curr
+                  },function(){});
 
+                  if(!first){
+                      //do something
+                  }
+              }
+          });
 
         // 监听全选
         form.on('checkbox(checkall)', function(data){

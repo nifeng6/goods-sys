@@ -1,5 +1,7 @@
 package net.codetip.goodssys.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import net.codetip.goodssys.domain.Goods;
 import net.codetip.goodssys.domain.Ugoods;
 import net.codetip.goodssys.domain.User;
@@ -47,8 +49,11 @@ public class MainController {
     }
 
     @RequestMapping("/memberList")
-    public String merberList(Model model){
+    public String merberList(Model model,int p){
+        PageHelper.startPage(p,3);
         List<User> users = userMapper.findAll();
+        PageInfo<User> page = new PageInfo<>(users);
+        model.addAttribute("page",page);
         model.addAttribute("users",users);
         return "member-list";
     }
